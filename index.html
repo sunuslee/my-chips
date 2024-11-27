@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈码</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            background: #f5f5f5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin: 0 0 5px 0;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .chip-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .chip-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+}
+
+        .chip-image {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .chip-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .value-input {
+    border: none;
+    border-bottom: 1px solid #333;
+    font-size: 1.3em;
+    color: #000;
+    font-weight: bold;
+    padding: 3px;
+    width: 100px;
+    outline: none;
+    margin-left: 20px;
+}
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .phrase {
+            font-size: 1.1em;
+            color: #2980b9;
+            font-weight: bold;
+            margin: 0;
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 3px 8px;
+            font-size: 0.9em;
+        }
+
+        .description {
+            display: none;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+        }
+
+        .description.active {
+            display: block;
+        }
+
+        .description p {
+            margin: 4px 0;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .extra-chips {
+            display: flex;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .simple-chip-card {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .collection-story {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+        }
+
+        .collection-story h2 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .collection-story p {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>哈码®️</h1>
+    </div>
+
+    <div class="chips-container">
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./3.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">Peace & Love</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>代表初入牌场的纯真状态</p>
+                <p>充满对游戏的热爱</p>
+                <p>没有功利心的美好时光</p>
+                <p>象征最初的平和心态</p>
+            </div>
+        </div>
+
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./4.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">Happy Hour</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>暗示快乐的开始</p>
+                <p>借用欢乐时光的概念</p>
+                <p>体现轻松愉快的氛围</p>
+                <p>暗示好运即将来临</p>
+            </div>
+        </div>
+
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./5.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">Bad Boy</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>标志着心态的首次转变</p>
+                <p>开始萌生投机想法</p>
+                <p>象征纯真的消逝</p>
+                <p>展现玩家的蜕变</p>
+            </div>
+        </div>
+
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./6.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">Gone Wild</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>代表完全放飞自我</p>
+                <p>展现无所顾忌的状态</p>
+                <p>暗示理智的消退</p>
+                <p>象征彻底进入状态</p>
+            </div>
+        </div>
+
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./7.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">To The Beach</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>充满自嘲的豪放</p>
+                <p>暗示破釜沉舟的决心</p>
+                <p>展现豁达的生活态度</p>
+                <p>"赢了就度假，输了也度假"的洒脱</p>
+            </div>
+        </div>
+
+        <div class="chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./8.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+            <div class="header-row">
+                <div class="phrase">All In Or Buy In</div>
+                <button class="expand-btn" onclick="toggleDescription(this)">详情 ▼</button>
+            </div>
+            <div class="description">
+                <p>最终的抉择时刻</p>
+                <p>要么梭哈要么追加</p>
+                <p>体现德州扑克的本质</p>
+                <p>人生选择的缩影</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="extra-chips">
+        <div class="simple-chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./2.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+        </div>
+        <div class="simple-chip-card">
+            <div class="chip-info">
+                <div class="chip-image">
+                    <img src="./1.png" alt="Poker Chip">
+                </div>
+                <input type="text" class="value-input" placeholder="">
+            </div>
+        </div>
+    </div>
+
+    <div class="collection-story">
+        <h2>收藏版筹码的故事</h2>
+        <p>这套筹码不仅仅是游戏的道具，更是一个德州扑克玩家心路历程的完美写照。从最初的纯真平和，经历快乐时光，逐渐"变坏"尝试，到彻底放飞自我，再到看淡输赢的豁达，最终面临人生的终极抉择。</p>
+        <p>每一个级别都代表着一个特定的阶段，一种特别的心境。玩家们能在这些标语中找到自己的影子，回忆起自己在牌桌上的点点滴滴。这不仅是一套筹码，更是一个关于成长、关于生活的完整故事。</p>
+        <p>从 Peace & Love 到 All In Or Buy In，展现了一个德州扑克玩家从初入牌场到最终在得失之间找到平衡的全过程。每个标语都是一个独特的节点，共同构成了一个充满智慧与趣味的收藏系列。</p>
+    </div>
+
+    <script>
+        function toggleDescription(btn) {
+            const desc = btn.closest('.chip-card').querySelector('.description');
+            const isActive = desc.classList.toggle('active');
+            btn.textContent = isActive ? '收起 ▲' : '详情 ▼';
+        }
+    </script>
+</body>
+</html>
