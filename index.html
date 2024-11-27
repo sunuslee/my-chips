@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+
     <title>哈码</title>
     <style>
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 5px;
+                max-width: 100%;
+            }
+
+            .chip-info {
+                gap: 15px;
+            }
+
+            .value-input {
+                -webkit-appearance: none;
+                appearance: none;
+                background-color: transparent;
+                border-radius: 0;
+            }
+
+            .chip-image {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
         body {
             font-family: Arial, sans-serif;
             max-width: 600px;
@@ -35,16 +60,16 @@
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .chip-info {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 10px;
-    justify-content: flex-start;
-}
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 10px;
+            justify-content: flex-start;
+        }
 
         .chip-image {
             width: 80px;
@@ -60,16 +85,16 @@
         }
 
         .value-input {
-    border: none;
-    border-bottom: 1px solid #333;
-    font-size: 1.3em;
-    color: #000;
-    font-weight: bold;
-    padding: 3px;
-    width: 100px;
-    outline: none;
-    margin-left: 20px;
-}
+            border: none;
+            border-bottom: 1px solid #333;
+            font-size: 1.3em;
+            color: #000;
+            font-weight: bold;
+            padding: 3px;
+            width: 100px;
+            outline: none;
+            margin-left: 20px;
+        }
 
         .header-row {
             display: flex;
@@ -124,7 +149,7 @@
             background: white;
             border-radius: 12px;
             padding: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .collection-story {
@@ -132,7 +157,7 @@
             padding: 12px;
             border-radius: 12px;
             margin-top: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             font-size: 0.9em;
         }
 
@@ -148,6 +173,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>哈码®️</h1>
@@ -303,4 +329,5 @@
         }
     </script>
 </body>
+
 </html>
