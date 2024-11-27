@@ -7,73 +7,32 @@
 
     <title>哈码</title>
     <style>
-        @media screen and (max-width: 480px) {
-            body {
-                padding: 5px;
-                max-width: 100%;
-            }
-
-            .chip-info {
-                gap: 15px;
-            }
-
-            .value-input {
-                -webkit-appearance: none;
-                appearance: none;
-                background-color: transparent;
-                border-radius: 0;
-            }
-
-            .chip-image {
-                width: 60px;
-                height: 60px;
-            }
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 10px;
-            background: #f5f5f5;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .header h1 {
-            font-size: 1.4em;
-            color: #2c3e50;
-            margin: 0 0 5px 0;
-        }
-
-        .header p {
-            color: #7f8c8d;
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 100%;
             margin: 0;
-            font-size: 0.9em;
+            padding: 15px;
+            background: #f5f5f5;
+            box-sizing: border-box;
         }
 
         .chip-card {
             background: white;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .chip-info {
             display: flex;
             align-items: center;
-            gap: 30px;
-            margin-bottom: 10px;
-            justify-content: flex-start;
+            gap: 20px;
         }
 
         .chip-image {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             flex-shrink: 0;
         }
 
@@ -85,91 +44,87 @@
         }
 
         .value-input {
+            -webkit-appearance: none;
+            appearance: none;
             border: none;
             border-bottom: 1px solid #333;
-            font-size: 1.3em;
-            color: #000;
+            background: transparent;
+            font-size: 16px;
             font-weight: bold;
-            padding: 3px;
-            width: 100px;
+            color: #000;
+            padding: 8px 0;
+            width: 120px;
             outline: none;
-            margin-left: 20px;
+            margin: 0;
         }
 
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 8px 0;
+            margin-top: 12px;
         }
 
         .phrase {
-            font-size: 1.1em;
+            font-size: 18px;
             color: #2980b9;
-            font-weight: bold;
-            margin: 0;
-            flex-grow: 1;
-            padding-right: 10px;
+            font-weight: 600;
         }
 
         .expand-btn {
             background: none;
             border: none;
             color: #666;
-            cursor: pointer;
-            padding: 3px 8px;
-            font-size: 0.9em;
+            padding: 8px;
+            font-size: 14px;
         }
 
         .description {
             display: none;
-            margin-top: 8px;
-            padding-top: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid #eee;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
         .description.active {
             display: block;
         }
 
-        .description p {
-            margin: 4px 0;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-
         .extra-chips {
-            display: flex;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin: 15px 0;
-        }
-
-        .simple-chip-card {
-            flex: 1;
-            background: white;
-            border-radius: 12px;
-            padding: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .collection-story {
             background: white;
-            padding: 12px;
-            border-radius: 12px;
-            margin-top: 15px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            font-size: 0.9em;
+            padding: 16px;
+            border-radius: 16px;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        .collection-story h2 {
-            color: #2c3e50;
-            margin: 0 0 10px 0;
-            font-size: 1.2em;
-        }
-
-        .collection-story p {
-            margin: 8px 0;
-            line-height: 1.4;
+        @media screen and (max-width: 360px) {
+            body {
+                padding: 10px;
+            }
+            
+            .chip-image {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .value-input {
+                width: 100px;
+            }
+            
+            .phrase {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
