@@ -94,22 +94,31 @@
         }
 
         .extra-chips {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 15px 0;
-        }
+    display: flex;
+    width: 92%;
+    max-width: 600px;
+    gap: 15px;
+    margin: 15px 0;
+}
 
-        .simple-chip-card .chip-info {
+.simple-chip-card {
+    width: calc(50% - 7.5px);
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.simple-chip-card .chip-info {
     display: flex;
     align-items: center;
     gap: 20px;
-    justify-content: flex-start;
 }
 
 .simple-chip-card .value-input {
-    flex: 0 0 120px; /* 固定宽度 */
-    margin-left: 20px; /* 固定间距 */
+    flex: 0 0 120px;
+    margin-left: 20px;
 }
 
         .collection-story {
