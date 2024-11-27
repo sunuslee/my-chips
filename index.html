@@ -2,10 +2,11 @@
 <html>
 
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
 
-    <title>哈®️</title>
+    <title>哈码®️</title>
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -94,31 +95,32 @@
         }
 
         .extra-chips {
-    display: flex;
     width: 92%;
     max-width: 600px;
+    display: flex;
     gap: 15px;
-    margin: 15px 0;
+    justify-content: space-between;
 }
 
 .simple-chip-card {
-    width: calc(50% - 7.5px);
+    width: calc(46% - 7.5px); /* 固定宽度 */
     background: white;
     border-radius: 16px;
     padding: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    box-sizing: border-box;
 }
 
 .simple-chip-card .chip-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   width: 100%;
+   overflow: hidden; /* 防止内容溢出 */
 }
 
 .simple-chip-card .value-input {
-    flex: 0 0 120px;
-    margin-left: 20px;
+   width: 120px;
+   min-width: 0; /* 允许input收缩 */
+   margin-left: 10px;
 }
 
         .collection-story {
@@ -310,6 +312,12 @@
         <p>从 Peace & Love 到 All In Or Buy In，展现了一个德州扑克玩家从初入牌场到最终在得失之间找到平衡的全过程。每个标语都是一个独特的节点，共同构成了一个充满智慧与趣味的收藏系列。</p>
     </div>
 
+    <div class="screenshot-container" style="width: 92%; max-width: 600px; margin: 15px auto;">
+        <button id="screenshotBtn" style="width: 100%; padding: 12px; background: #2980b9; color: white; border: none; border-radius: 8px; font-size: 16px;">
+            分享筹码设置
+        </button>
+    </div>
+
     <script>
         function toggleDescription(btn) {
             const desc = btn.closest('.chip-card').querySelector('.description');
@@ -317,6 +325,33 @@
             btn.textContent = isActive ? '收起 ▲' : '详情 ▼';
         }
     </script>
+    <script>
+        document.getElementById('screenshotBtn').addEventListener('click', async () => {
+            // 截图主要内容
+            const container = document.querySelector('.chips-container');
+            const extraChips = document.querySelector('.extra-chips');
+            
+            // 创建临时容器
+            const temp = document.createElement('div');
+            temp.style.position = 'absolute';
+            temp.style.left = '-9999px';
+            temp.appendChild(container.cloneNode(true));
+            temp.appendChild(extraChips.cloneNode(true));
+            document.body.appendChild(temp);
+            
+            try {
+                const canvas = await html2canvas(temp);
+                const link = document.createElement('a');
+                link.download = '我的筹码设置.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            } catch (err) {
+                console.error('截图失败:', err);
+            }
+            
+            document.body.removeChild(temp);
+        });
+        </script>
 </body>
 
 </html>
