@@ -327,11 +327,9 @@
     </script>
     <script>
         document.getElementById('screenshotBtn').addEventListener('click', async () => {
-            // 截图主要内容
             const container = document.querySelector('.chips-container');
             const extraChips = document.querySelector('.extra-chips');
             
-            // 创建临时容器
             const temp = document.createElement('div');
             temp.style.position = 'absolute';
             temp.style.left = '-9999px';
@@ -341,10 +339,45 @@
             
             try {
                 const canvas = await html2canvas(temp);
-                const link = document.createElement('a');
-                link.download = '我的筹码设置.png';
-                link.href = canvas.toDataURL();
-                link.click();
+                
+                // 检测是否是iOS Safari
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                
+                if (isIOS) {
+                    // 转换canvas为blob
+                    canvas.toBlob(async (blob) => {
+                        try {
+                            // 使用share API
+                            if (navigator.share) {
+                                const file = new File([blob], "我的筹码设置.png", {
+                                    type: "image/png"
+                                });
+                                
+                                await navigator.share({
+                                    files: [file],
+                                    title: '我的筹码设置',
+                                });
+                            } else {
+                                // 降级方案：直接打开图片
+                                const imgUrl = canvas.toDataURL();
+                                window.open(imgUrl);
+                            }
+                        } catch (err) {
+                            console.error('保存失败:', err);
+                            // 降级到默认下载方式
+                            const link = document.createElement('a');
+                            link.download = '我的筹码设置.png';
+                            link.href = canvas.toDataURL();
+                            link.click();
+                        }
+                    }, 'image/png');
+                } else {
+                    // 非iOS设备使用默认下载方式
+                    const link = document.createElement('a');
+                    link.download = '我的筹码设置.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                }
             } catch (err) {
                 console.error('截图失败:', err);
             }
