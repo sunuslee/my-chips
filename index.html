@@ -375,21 +375,19 @@
     <script>
         document.getElementById('screenshotBtn').addEventListener('click', async () => {
             const container = document.querySelector('.chips-container');
-            const extraChips = document.querySelector('.extra-chips');
-
+        
             const temp = document.createElement('div');
             temp.style.position = 'absolute';
             temp.style.left = '-9999px';
             temp.appendChild(container.cloneNode(true));
-            temp.appendChild(extraChips.cloneNode(true));
             document.body.appendChild(temp);
-
+            
             try {
                 const canvas = await html2canvas(temp);
-
+                
                 // 检测是否是iOS Safari
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
+                
                 if (isIOS) {
                     // 转换canvas为blob
                     canvas.toBlob(async (blob) => {
@@ -399,7 +397,7 @@
                                 const file = new File([blob], "我的筹码设置.png", {
                                     type: "image/png"
                                 });
-
+                                
                                 await navigator.share({
                                     files: [file],
                                     title: '我的筹码设置',
@@ -428,10 +426,10 @@
             } catch (err) {
                 console.error('截图失败:', err);
             }
-
+            
             document.body.removeChild(temp);
         });
-    </script>
+        </script>
 </body>
 
 </html>
