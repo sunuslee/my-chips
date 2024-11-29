@@ -100,14 +100,14 @@
             border: none;
             color: #666;
             cursor: pointer;
-            width: 24px;
-            height: 24px;
+            width: 12px;
+            height: 12px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             padding: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18'%3E%3Cpath fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("./expand.png");
             background-position: center;
             background-repeat: no-repeat;
             background-size: 18px;
@@ -373,63 +373,118 @@
         }
     </script>
     <script>
-        document.getElementById('screenshotBtn').addEventListener('click', async () => {
-            const container = document.querySelector('.chips-container');
-        
-            const temp = document.createElement('div');
-            temp.style.position = 'absolute';
-            temp.style.left = '-9999px';
-            temp.appendChild(container.cloneNode(true));
-            document.body.appendChild(temp);
-            
-            try {
-                const canvas = await html2canvas(temp);
-                
-                // 检测是否是iOS Safari
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                
-                if (isIOS) {
-                    // 转换canvas为blob
-                    canvas.toBlob(async (blob) => {
-                        try {
-                            // 使用share API
-                            if (navigator.share) {
-                                const file = new File([blob], "我的筹码设置.png", {
-                                    type: "image/png"
-                                });
-                                
-                                await navigator.share({
-                                    files: [file],
-                                    title: '我的筹码设置',
-                                });
-                            } else {
-                                // 降级方案：直接打开图片
-                                const imgUrl = canvas.toDataURL();
-                                window.open(imgUrl);
-                            }
-                        } catch (err) {
-                            console.error('保存失败:', err);
-                            // 降级到默认下载方式
-                            const link = document.createElement('a');
-                            link.download = '我的筹码设置.png';
-                            link.href = canvas.toDataURL();
-                            link.click();
-                        }
-                    }, 'image/png');
-                } else {
-                    // 非iOS设备使用默认下载方式
-                    const link = document.createElement('a');
-                    link.download = '我的筹码设置.png';
-                    link.href = canvas.toDataURL();
-                    link.click();
-                }
-            } catch (err) {
-                console.error('截图失败:', err);
+    document.getElementById('screenshotBtn').addEventListener('click', async () => {
+
+        const expandBtns = document.querySelectorAll('.expand-btn');
+
+  // 保存所有 .expand-btn 元素的初始 display 属性
+  const originalDisplayValues = [];
+  expandBtns.forEach(btn => {
+    originalDisplayValues.push(btn.style.display);
+    btn.style.display = 'none';
+  });
+  
+  const container = document.querySelector('.chips-container');
+
+  const temp = document.createElement('div');
+  temp.style.position = 'absolute';
+  temp.style.left = '-9999px';
+  temp.appendChild(container.cloneNode(true));
+  document.body.appendChild(temp);
+
+  try {
+    const canvas = await html2canvas(temp);
+
+    // 检测是否是iOS Safari
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    if (isIOS) {
+      // 转换canvas为blob
+      canvas.toBlob(async (blob) => {
+        try {
+          // 使用share API
+          if (navigator.share) {
+            const file = new File([blob], "我的筹码设置.png", {
+              type: "image/png"
+            });
+
+            await navigator.share({
+              files: [file],
+              title: '我的筹码设置',
+            });
+          } else {
+            // 打开预览窗口
+            const imageUrl = URL.createObjectURL(blob);
+            const previewWindow = window.open(imageUrl, '_blank');
+            if (previewWindow) {
+                previewWindow.addEventListener('DOMContentLoaded', () => {
+                // 在预览窗口中添加保存到相册的提示
+                const savePrompt = previewWindow.document.createElement('div');
+                savePrompt.textContent = '长按图片以保存到相册';
+                savePrompt.style.position = 'fixed';
+                savePrompt.style.bottom = '40px';
+                savePrompt.style.width = '100%';
+                savePrompt.style.height = '50px';
+                savePrompt.style.textAlign = 'center';
+                savePrompt.style.fontSize = '26px';
+                savePrompt.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                savePrompt.style.color = 'white';
+                savePrompt.style.padding = '10px 0';
+                savePrompt.style.display = 'flex';
+                savePrompt.style.alignItems = 'center';
+                savePrompt.style.justifyContent = 'center';
+
+                // 添加关闭按钮
+                const closeBtn = previewWindow.document.createElement('button');
+                closeBtn.textContent = 'X';
+                closeBtn.style.position = 'absolute';
+                closeBtn.style.top = '50%';
+                closeBtn.style.transform = 'translateY(-50%)';
+                closeBtn.style.right = '10px';
+                closeBtn.style.fontSize = '36px';
+                closeBtn.style.backgroundColor = 'transparent';
+                closeBtn.style.color = 'white';
+                closeBtn.style.border = 'none';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.addEventListener('click', () => {
+                  savePrompt.style.display = 'none';
+                });
+                savePrompt.appendChild(closeBtn);
+
+                previewWindow.document.body.appendChild(savePrompt);
+              });
+            } else {
+              console.error('无法打开预览窗口');
             }
-            
-            document.body.removeChild(temp);
-        });
-        </script>
+          }
+        } catch (err) {
+          console.error('保存失败:', err);
+          // 降级到默认下载方式
+          const link = document.createElement('a');
+          link.download = '我的筹码设置.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        }
+      }, 'image/png');
+    } else {
+      // 非iOS设备使用默认下载方式
+      const link = document.createElement('a');
+      link.download = '我的筹码设置.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  } catch (err) {
+    console.error('截图失败:', err);
+  } finally {
+    // 完成截图后,恢复所有 .expand-btn 的显示状态
+    expandBtns.forEach((btn, index) => {
+      btn.style.display = originalDisplayValues[index];
+    });
+  }
+
+  document.body.removeChild(temp);
+});    
+    </script>
 </body>
 
 </html>
